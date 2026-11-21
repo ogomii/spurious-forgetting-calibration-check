@@ -1,43 +1,3 @@
-<div align="center">
-
-# When Forgetting Is Not Catastrophic: On the Mechanics of Spurious Forgetting
-
-**Vedant Palit**<sup>1,2,3</sup>, **Florent Draye**<sup>1,4</sup>, **Nicolas Zucchet**<sup>5</sup>, **Zhijing Jin**<sup>1,2,3</sup>, **Bernhard Schölkopf**<sup>1,6</sup>
-
-<sup>1</sup>MPI for Intelligent Systems, Tübingen &nbsp; <sup>2</sup>University of Toronto & Vector Institute &nbsp; <sup>3</sup>EuroSafeAI<br>
-<sup>4</sup>Hector Foundation &nbsp; <sup>5</sup>Stanford University &nbsp; <sup>6</sup>ELLIS Institute Tübingen
-
-[![arXiv](https://img.shields.io/badge/arXiv-2610.08718-b31b1b.svg)](https://arxiv.org/abs/2610.08718v1)
-[![Python](https://img.shields.io/badge/python-3.10%2B-3776ab.svg?logo=python&logoColor=white)](https://www.python.org/)
-[![JAX](https://img.shields.io/badge/JAX-0.4-a259ff.svg)](https://github.com/jax-ml/jax)
-[![PyTorch](https://img.shields.io/badge/PyTorch-2.4%2B-ee4c2c.svg?logo=pytorch&logoColor=white)](https://pytorch.org/)
-[![uv](https://img.shields.io/badge/managed%20with-uv-de5fe9.svg)](https://docs.astral.sh/uv/)
-
-
-</div>
-
-<p align="center">
-  <img src="assets/post1_no_title.gif" alt="Finetuning on new facts: two runs of the same model" width="100%">
-</p>
-
-<p align="center"><em>
-Changing only the finetuning data turns catastrophic forgetting into spurious forgetting.
-A transformer is pretrained on two non-overlapping sets of facts, A and B, then finetuned on new facts only, without any replay.
-Solid lines show recall of the old facts A; dotted lines show recall of the new facts.
-<b>Left:</b> the new facts C overlap with both pretraining sets, and recall of A declines slowly and steadily.
-<b>Right:</b> the new facts B′ overlap only with B; recall of A collapses, recovers although A is never seen again, and later erodes.
-</em></p>
-
-**TL;DR.** Finetuning on new facts can produce forgetting that undoes itself: recall of the old facts collapses, recovers as training continues on the new facts alone, and only then erodes for good. The collapse is a shared, reversible shift that hides all old facts together; the erosion is a slow, fact-specific drift, and only the second is catastrophic. We identify the mechanism in a minimal associative memory and confirm it with interventions in a transformer trained on synthetic biographies and in OLMo 2 1B.
-
-This repository contains the code for all experiments in the paper, at three scales:
-
-| Setting | Framework | Code |
-| --- | --- | --- |
-| Minimal model (associative memory) | JAX | [`toy/`](toy) |
-| Transformer on synthetic biographies | JAX / Flax | [`src/`](src), [`scripts/`](scripts) |
-| Pretrained language model (OLMo 2 1B) | PyTorch | [`llm/`](llm), [`llm_real/`](llm_real) |
-
 ## Installation
 
 The minimal model and the transformer use JAX; install them and the plotting tools with [uv](https://docs.astral.sh/uv/):
@@ -87,17 +47,3 @@ Select the CounterFact facts OLMo 2 1B already knows (the old facts), build the 
 ```
 
 ## Citation
-
-For questions, contact Vedant Palit (vedant.palit@tuebingen.mpg.de). If you find this work useful, please cite:
-
-```bibtex
-@misc{palit2026forgettingcatastrophicmechanicsspurious,
-  title         = {When Forgetting is not Catastrophic: On the Mechanics of Spurious Forgetting},
-  author        = {Vedant Palit and Florent Draye and Nicolas Zucchet and Zhijing Jin and Bernhard Schölkopf},
-  year          = {2026},
-  eprint        = {2610.08718},
-  archivePrefix = {arXiv},
-  primaryClass  = {cs.CL},
-  url           = {https://arxiv.org/abs/2610.08718}
-}
-```
