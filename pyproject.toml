@@ -3,7 +3,7 @@ name = "forgetting-dynamics"
 version = "0.1.0"
 requires-python = ">=3.10"
 dependencies = [
-    "jax>=0.4.34,<0.5",
+    "jax[cuda12]>=0.4.34,<0.5",
     "jaxlib>=0.4.34,<0.5",
     "jax-metal>=0.1.0 ; sys_platform == 'darwin'",
     "flax>=0.7.0",

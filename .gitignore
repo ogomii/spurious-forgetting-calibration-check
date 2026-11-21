@@ -1,0 +1,7 @@
+checkpoints/
+*.lock
+*.pyc
+wandb/
+*.npz
+*.txt
+.*
